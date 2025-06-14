@@ -18,7 +18,7 @@ This script automates the process of submitting logbook entries to the [Student 
 ## Input Data
 data.xlsx: Contains the activity log data to be submitted.
 The input Excel file should have columns corresponding to the following fields:
-- **Waktu**: The date of the activity (format: YYYY-MM-DD). This will be sent as the main date field of the log entry.
+- **Waktu**: The date of the activity (format: DD/MM/YYYY). This will be sent as the main date field of the log entry.
 - **Tstart**: Start time of the activity (format: HH:MM). This corresponds to the beginning of the mentoring or activity session.
 - **Tend** End time of the activity (format: HH:MM). Marks the end of the mentoring or session period.
 - **JenisLogId** An integer representing the type of activity being logged, corresponding to internal IDs used in the portal ( 1 for "Berita Acara Pembimbingan (Konsultasi/Mentoring/Coaching) ", 2 for "Berita Acara Ujian", and 3 for "Berita Acara Kegiatan").
