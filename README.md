@@ -42,7 +42,7 @@ The input Excel file should have columns corresponding to the following fields:
     
     For example, if your URL looks like this:
 
-    ![Example URL](images\example-aktivitasID.png)
+    ![Example URL](images/example-aktivitasID.png)
 
     your aktivitasID is: `mQmVKibuyaaaaaaaaaaaAJGZvXRzvNiKkxQi4S7w`
 
