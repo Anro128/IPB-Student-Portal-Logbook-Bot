@@ -18,11 +18,11 @@ This script automates the process of submitting logbook entries to the [Student 
 ## Input Data
 data.xlsx: Contains the activity log data to be submitted.
 The input Excel file should have columns corresponding to the following fields:
-- **Waktu**: The date of the activity (format: DD/MM/YYYY). This will be sent as the main date field of the log entry.
+- **Waktu**: The date of the activity (format: MM/DD/YYYY). This will be sent as the main date field of the log entry.
 - **Tstart**: Start time of the activity (format: HH:MM). This corresponds to the beginning of the mentoring or activity session.
 - **Tend** End time of the activity (format: HH:MM). Marks the end of the mentoring or session period.
 - **JenisLogId** An integer representing the type of activity being logged, corresponding to internal IDs used in the portal ( 1 for "Berita Acara Pembimbingan (Konsultasi/Mentoring/Coaching) ", 2 for "Berita Acara Ujian", and 3 for "Berita Acara Kegiatan").
-- **IsLuring**: Indicates the mode of activity delivery. Use 0 for online ("false"), 1 for offline ("true"), and 2 for Hybrid.
+- **IsLuring**: Indicates the mode of activity delivery. Use 0 for online, 1 for offline, and 2 for Hybrid.
 - **Lokasi**: The physical or virtual location of the activity, depending on whether it was conducted offline or online (e.g., "Zoom", "Gedung Andi Hakim Nasoetion").
 - **Keterangan**: Additional description of the activity.
 - **FilePath**: Path to the supporting document or proof of activity (e.g., image, PDF). The script will upload this file as part of the submission.
@@ -38,13 +38,13 @@ The input Excel file should have columns corresponding to the following fields:
     
 - Input the aktivitasId that corresponds to your Kampus Merdeka activity.
     
-    **Open your activity logbook.**
-    
+    Open the IPB Student Portal, go to your Kampus Merdeka Logbook page, and check the URL in your browser’s address bar. The aktivitasId is the long string at the end of the URL.
+
     For example, if your URL looks like this:
 
     ![Example URL](images/example-aktivitasID.png)
 
-    your aktivitasID is: `mQmVKibuyaaaaaaaaaaaAJGZvXRzvNiKkxQi4S7w`
+    Then your aktivitasId is the long string at the end of the URL: `mQmVKibuyaaaaaaaaaaaAJGZvXRzvNiKkxQi4S7w`
 
 - Input the browser you used to log in: "firefox" or "chrome".
 
