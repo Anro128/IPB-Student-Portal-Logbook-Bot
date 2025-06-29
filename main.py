@@ -7,8 +7,10 @@ import browser_cookie3
 
 def getCookies(domain, browser = 'firefox', cookieName=''):
     Cookies = {}
-    Bcookies = list(browser_cookie3.firefox())
-    if(browser == 'chrome'):
+    Bcookies = ""
+    if(browser.lower() == 'firefox'):
+        Bcookies = list(browser_cookie3.firefox())
+    elif(browser.lower() == 'chrome'):
         Bcookies = list(browser_cookie3.chrome())
 
     for cookie in Bcookies:
@@ -108,7 +110,7 @@ for idx, row in df.iterrows():
             "status_code": "ERROR",
             "error": str(e)
         })
-        print(f"data {idx+1} failed to upload")
+        print(f"data {idx+1} failed to upload: {str(e)}")
 
 
 out_df = pd.DataFrame(results)

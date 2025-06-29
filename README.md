@@ -46,7 +46,7 @@ The input Excel file should have columns corresponding to the following fields:
 
     Then your aktivitasId is the long string at the end of the URL: `mQmVKibuyaaaaaaaaaaaAJGZvXRzvNiKkxQi4S7w`
 
-- Input the browser you used to log in: "firefox" or "chrome".
+- Input the browser you used to log in: "firefox" or "chrome". **(If you use Chrome, you must run this script as an administrator.)**
 
 5. After execution, check hasil_upload.csv for success or failure of each log entry.
 
