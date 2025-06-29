@@ -4,6 +4,7 @@ import pandas as pd
 import os
 import mimetypes
 import browser_cookie3
+from datetime import datetime
 
 def getCookies(domain, browser = 'firefox', cookieName=''):
     Cookies = {}
@@ -25,6 +26,20 @@ def getCookies(domain, browser = 'firefox', cookieName=''):
     else:
         return Cookies 
 
+def is_valid_date(tanggal_str):
+    try:
+        datetime.strptime(tanggal_str, "%d/%m/%Y")
+        return True
+    except ValueError:
+        return False    
+
+def is_valid_time(waktu_str):
+    try:
+        datetime.strptime(waktu_str, "%H:%M")
+        return True
+    except ValueError:
+        return False
+
 aktivitas_id = input("Aktivitas ID: ")
 browser = input("Browsers used: ")
 
@@ -32,7 +47,7 @@ BASE_URL      = "https://studentportal.ipb.ac.id"
 COOKIE_JAR    = getCookies("studentportal.ipb.ac.id", browser)
 EXCEL_PATH    = "data.xlsx" 
 SHEET_NAME    = "Sheet1"      
-OUTPUT_LOG    = "hasil_upload.csv" 
+OUTPUT_LOG    = "result.csv" 
 
 df = pd.read_excel(EXCEL_PATH, sheet_name=SHEET_NAME)
 
@@ -48,6 +63,18 @@ results = []
 
 for idx, row in df.iterrows():
     try:
+        if row["Tstart"] >= row['Tend']:
+            raise ValueError(f"Start time {row['Tstart']} must be earlier than end time {row['Tend']}\nData {idx+1} skipped.")
+
+        if not is_valid_date(row['Waktu']):
+            raise ValueError(f"Invalid date format, use DD/MM/YYYY. \nData {idx+1} skipped.")
+        
+        if not is_valid_time(row['Tstart']):
+            raise ValueError(f"Invalid time start format, use HH:MM. \nData {idx+1} skipped.")
+        
+        if not is_valid_time(row['Tend']):
+            raise ValueError(f"Invalid time end format, use HH:MM. \nData {idx+1} skipped.")
+        
         modal_url = (
             f"{BASE_URL}/Kegiatan/LogAktivitasKampusMerdeka/Tambah"
             f"?aktivitasId={aktivitas_id}"
@@ -63,9 +90,9 @@ for idx, row in df.iterrows():
 
         data = hidden.copy()
         data.update({
-            "Waktu":row['Waktu'],
-            "Tmw":row['Tstart'],
-            "Tsw":row['Tend'],
+            "Waktu":str(row['Waktu']),
+            "Tmw":str(row['Tstart']),
+            "Tsw":str(row['Tend']),
             "JenisLogbookKegiatanKampusMerdekaId":str(row['JenisLogId']),
             "ListDosenPembimbing[0].Value":str("true").lower(),
             "IsLuring": "true" if row['IsLuring'] == 1 else "false" if row['IsLuring'] == 0 else "",
