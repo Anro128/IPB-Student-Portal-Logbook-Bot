@@ -40,6 +40,10 @@ def is_valid_time(waktu_str):
     except ValueError:
         return False
 
+def repair_path(path):
+    path = str(path)
+    return path.replace("\\", "/")
+
 aktivitas_id = input("Aktivitas ID: ")
 browser = input("Browsers used: ")
 
@@ -100,7 +104,7 @@ for idx, row in df.iterrows():
             "Keterangan":row['Keterangan'],
         })
 
-        file_path = row['FilePath']
+        file_path = repair_path(row['FilePath'])
         filename  = os.path.basename(file_path)
         ctype, _  = mimetypes.guess_type(file_path)
         files = {
