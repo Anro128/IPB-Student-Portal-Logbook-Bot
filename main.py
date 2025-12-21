@@ -49,7 +49,7 @@ browser = input("Browsers used: ")
 
 BASE_URL      = "https://studentportal.ipb.ac.id"
 COOKIE_JAR    = getCookies("studentportal.ipb.ac.id", browser)
-EXCEL_PATH    = "data.xlsx" 
+EXCEL_PATH    = "data.xlsx"
 SHEET_NAME    = "Sheet1"      
 OUTPUT_LOG    = "result.csv" 
 
@@ -103,10 +103,18 @@ for idx, row in df.iterrows():
             "Lokasi":row['Lokasi'],
             "Keterangan":row['Keterangan'],
         })
+        
+        files = None  
 
-        file_path = repair_path(row['FilePath'])
-        filename  = os.path.basename(file_path)
-        ctype, _  = mimetypes.guess_type(file_path)
+        file_path_raw = row.get("FilePath")
+
+        if pd.notna(file_path_raw) and str(file_path_raw).strip() != "":
+            file_path = repair_path(file_path_raw)
+
+            if os.path.isfile(file_path):
+                filename = os.path.basename(file_path)
+                ctype, _ = mimetypes.guess_type(file_path)
+
         files = {
             "File": (
                 filename,
