@@ -98,11 +98,25 @@ for idx, row in df.iterrows():
             "Tmw":str(row['Tstart']),
             "Tsw":str(row['Tend']),
             "JenisLogbookKegiatanKampusMerdekaId":str(row['JenisLogId']),
-            "ListDosenPembimbing[0].Value":str("true").lower(),
             "IsLuring": "true" if row['IsLuring'] == 1 else "false" if row['IsLuring'] == 0 else "",
             "Lokasi":row['Lokasi'],
             "Keterangan":row['Keterangan'],
         })
+
+        lecturer_cnt = sum(1 for k, v in data.items() if k.startswith("ListDosenPembimbing") and k.endswith(".Key.PembimbingId") and v)
+
+        dosen_str = str(row["Dosen"])
+        dosen_ids = [
+            int(d) if d.strip().isdigit() and int(d) <= lecturer_cnt else 1
+            for d in dosen_str.split(",")
+            if d.strip()
+        ]
+
+        if len(dosen_ids) > 1:
+            for dosen_id in dosen_ids:
+                data.update({f"ListDosenPembimbing[{dosen_id - 1}].Value":str("true").lower(),})
+        else:
+            data.update({"ListDosenPembimbing[0].Value":str("true").lower()})
         
         files = None  
 

@@ -22,6 +22,7 @@ The input Excel file should have columns corresponding to the following fields:
 - **Tstart**: Start time of the activity (format: HH:MM). This corresponds to the beginning of the mentoring or activity session.
 - **Tend** End time of the activity (format: HH:MM). Marks the end of the mentoring or session period.
 - **JenisLogId** An integer representing the type of activity being logged, corresponding to internal IDs used in the portal ( 1 for "Berita Acara Pembimbingan (Konsultasi/Mentoring/Coaching) ", 2 for "Berita Acara Ujian", and 3 for "Berita Acara Kegiatan").
+- **Dosen**: A comma-separated list indicating the order of supervising lecturers involved in the activity (e.g., `1`, `1,2`, `3,1`), any value exceeding the allowed lecturer count will be automatically replaced with `1`.
 - **IsLuring**: Indicates the mode of activity delivery. Use 0 for online, 1 for offline, and 2 for Hybrid.
 - **Lokasi**: The physical or virtual location of the activity, depending on whether it was conducted offline or online (e.g., "Zoom", "Gedung Andi Hakim Nasoetion").
 - **Keterangan**: Additional description of the activity.
